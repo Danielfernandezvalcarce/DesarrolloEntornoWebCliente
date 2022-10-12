@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <div id="container">
+        <label>Nom i Llinatges:</label>
+        <input id="name" /><br />
+        <label>Username:</label>
+        <input id="username" /><br />
+        <button id="botoValidar" onclick="nombre(), usuario(), resultado(nombre(), usuario())">Validar</button>
+    </div>
+    <div id="resultat"></div>
+    <div id="error"></div>
+</body>
+<script>
+//Escriu aquí el teu codi
+function nombre(){
+    //obtenemos el valor de lo que se pone en el campo
+
+    nom = document.getElementById("name").value;
+
+
+    //comprobamos los valores del campo nombre
+    if(nom.length < 5){
+        alert("El nombre y apellidos deben de ser de 5 caracteres como minimo y 30 como maximo");
+        return false;
+    }else if(nom.length > 30){
+        alert("El nombre y apellidos deben de ser de 5 caracteres como minimo y 30 como maximo");
+        return false;
+    }else{
+        return true;
+    }
+}
+
+function usuario(){
+    //obtenemos el valor del campo username
+    user = document.getElementById("username").value;
+
+    //comprobamos los valores del campo username
+    if(user.length =! 6 || user.includes("?") || user.includes(" ") || isNaN(user.slice(-1))){
+        alert("El nombre de usuario debe de ser de 6 caracteres de largo, no puede incluir espacios ni interrogantes")
+        return false;
+    }else{
+        return true;
+    }
+}
+
+function resultado(nombreValido, usuarioValido){
+    if(nombreValido == true && usuarioValido == true){
+        document.getElementById("resultat").innerHTML = "Usuario dado de alta!"
+    }else{
+        document.getElementById("error").innerHTML = "Error, atento a los alerts"
+    }
+}
+</script>
+
+</html>

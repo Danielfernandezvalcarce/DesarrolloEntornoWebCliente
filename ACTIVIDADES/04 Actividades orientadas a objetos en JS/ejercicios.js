@@ -148,23 +148,111 @@ function ejercicio5(cyclist_team){
 
 /*06.  Utiliza filter() para eliminar todos los ciclistas menores de 30 años */
 
+/*Funcionea auxiliares */
+
+function dateConverter(dateString) {
+  let brokenDate = dateString.split("/");
+  let day = brokenDate[0];
+  let month = brokenDate[1];
+  let year = brokenDate[2];
+  let convertedDate = year + "/" + month + "/" + day;
+  return convertedDate;
+}
+
+function age(element) {
+  let borndate = new Date(dateConverter(element.born));
+  let today = new Date();
+  let age = today.getFullYear() - borndate.getFullYear();
+  let m = today.getMonth - borndate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < borndate.getDate())) {
+      age--;
+  }
+  return age;
+}
+
 function ejercicio6(cyclist_team){
 
   let output = "";
 
-  function cambiaFechas(fecha){
-    
-    for (let i = 0; i < cyclist_team.cyclists.length; i++) {    
-      
-    }
-  }
-
-
   for (let i=0 ; i < cyclist_team.cyclists.length; i++) {
+
+    anos = age(cyclist_team.cyclists[i]);
     
-    output += cyclist_team.cyclists[i].name + " tiene " + cyclist_team.cyclists[i].born + " años.";
+    output += cyclist_team.cyclists[i].name + " tiene " + anos + " años. ";
 
   } 
 
   document.getElementById("salida").innerHTML = output;
+}
+
+/* 07.  Utiliza find() para encontrar el primer ciclista que tiene más de 30 años.  */
+
+function ejercicio7(cyclist_team){
+
+  let encontrado = false;
+  let i = 0;
+  let ciclista = "";
+
+  while(encontrado == false){
+    anos = age(cyclist_team.cyclists[i]);
+
+    if(anos > 30){
+      ciclista = cyclist_team.cyclists[i].name;
+      encontrado = true;
+    }
+    i++;
+  }
+  let output = "El primer ciclista encontrado que tiene más de 30 años es: " + ciclista;
+
+  document.getElementById("salida").innerHTML = output;
+
+}
+
+/*  08. Añade un ciclista a la posición 2 con los siguientes datos:  */
+
+// nom: "Josh Pantano", 
+// born: "30/11/1995", 
+// height: 1.88, 
+// tours: 2, 
+// wins: 9
+
+function ejercicio8(cyclist_team){
+
+  function addCyclist(name, born, height, tours, wins) {
+    const newCyclist = {
+        name: name,
+        born: born,
+        height: height,
+        tours: tours,
+        wins: wins
+    }
+    cyclist_team.cyclists.splice(2, 0, newCyclist);
+}
+addCyclist("Josh Pantano", "30/11/1995", 1.88, 2, 9);
+
+let nombres = "";
+
+for(let i=0; i < cyclist_team.cyclists.length; i++){
+    nombres += cyclist_team.cyclists[i].name + ", ";
+}
+
+document.getElementById("salida").innerHTML = nombres;
+
+}
+
+/*09.  Imprime nombres ordenados por edad: de más jóvenes a más viejos. */
+
+function ejercicio9(cyclist_team){
+
+cyclist_team.cyclists.sort((a, b) => age(a) - age(b));
+
+let output = "";
+
+for(let i=0; i < cyclist_team.cyclists.length; i++){
+  anos = age(cyclist_team.cyclists[i]);
+  output += cyclist_team.cyclists[i].name + ", tiene: " + anos + " años. ";
+}
+
+document.getElementById("salida").innerHTML = output;
+
 }

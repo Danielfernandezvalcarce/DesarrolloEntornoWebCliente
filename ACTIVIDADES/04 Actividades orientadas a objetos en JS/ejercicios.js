@@ -52,9 +52,7 @@ function ejercicio1(cyclist_team){
 
     let nombres = "";
 
-    for(let i=0; i < cyclist_team.cyclists.length; i++){
-        nombres += cyclist_team.cyclists[i].name + ", ";
-    }
+    cyclist_team.cyclists.forEach(element => { nombres += element.name + ", "});
 
     document.getElementById("salida").innerHTML = nombres;
 
@@ -68,9 +66,7 @@ function ejercicio2(cyclist_team){
 
     cyclist_team.cyclists.sort((a, b) => (a.name > b.name) ? 1 : -1);
 
-    for(let i=0; i < cyclist_team.cyclists.length; i++){
-        nombres += cyclist_team.cyclists[i].name + ", ";
-    }
+    cyclist_team.cyclists.forEach(element => { nombres += element.name + ", "});
 
     document.getElementById("salida").innerHTML = nombres;
 }
@@ -83,9 +79,7 @@ function ejercicio3(cyclist_team){
 
     cyclist_team.cyclists.sort((a,b) => b.height - a.height);
 
-    for(let i=0; i < cyclist_team.cyclists.length; i++){
-        nombres += cyclist_team.cyclists[i].name + ", ";
-    }
+    cyclist_team.cyclists.forEach(element => { nombres += element.name + ", "});
 
     document.getElementById("salida").innerHTML = nombres;
 }
@@ -115,12 +109,8 @@ function ejercicio4(cyclist_team){
     }
 
     cyclist_team.cyclists.sort((a, b) => ordenar(a, b));
-    
-    for (let i=0 ; i < cyclist_team.cyclists.length; i++) {
-      
-      output += cyclist_team.cyclists[i].name + " tiene " + cyclist_team.cyclists[i].tours + " tours y " + cyclist_team.cyclists[i].wins + " victorias, ";
 
-    }
+    cyclist_team.cyclists.forEach(element=> {output += element.name + " tiene " + element.tours + " tours y " + element.wins + " victorias, "})
 
     document.getElementById("salida").innerHTML = output;
     
@@ -136,19 +126,15 @@ function ejercicio5(cyclist_team){
   });
 
   let output = "";
-    
-  for (let i=0 ; i < addTours.length; i++) {
-    
-    output += addTours[i].name + " tiene " + addTours[i].tours + " tours y " + addTours[i].wins + " victorias, ";
 
-  } 
+  addTours.forEach(element => { output += element.name + " tiene " + element.tours + " tours y " + element.wins + " victorias, "});
 
   document.getElementById("salida").innerHTML = output;
 }
 
 /*06.  Utiliza filter() para eliminar todos los ciclistas menores de 30 años */
 
-/*Funcionea auxiliares */
+/*Funciones auxiliares */
 
 function dateConverter(dateString) {
   let brokenDate = dateString.split("/");
@@ -173,14 +159,8 @@ function age(element) {
 function ejercicio6(cyclist_team){
 
   let output = "";
-
-  for (let i=0 ; i < cyclist_team.cyclists.length; i++) {
-
-    anos = age(cyclist_team.cyclists[i]);
-    
-    output += cyclist_team.cyclists[i].name + " tiene " + anos + " años. ";
-
-  } 
+  
+  cyclist_team.cyclists.forEach(element => {output += element.name + " tiene " + age(element) + " años, "});
 
   document.getElementById("salida").innerHTML = output;
 }
@@ -189,20 +169,9 @@ function ejercicio6(cyclist_team){
 
 function ejercicio7(cyclist_team){
 
-  let encontrado = false;
-  let i = 0;
-  let ciclista = "";
+  let mayor30 = cyclist_team.cyclists.find(element => age(element) > 30).name;
 
-  while(encontrado == false){
-    anos = age(cyclist_team.cyclists[i]);
-
-    if(anos > 30){
-      ciclista = cyclist_team.cyclists[i].name;
-      encontrado = true;
-    }
-    i++;
-  }
-  let output = "El primer ciclista encontrado que tiene más de 30 años es: " + ciclista;
+  let output = "El primer ciclista encontrado que tiene más de 30 años es: " + mayor30;
 
   document.getElementById("salida").innerHTML = output;
 
@@ -230,13 +199,11 @@ function ejercicio8(cyclist_team){
 }
 addCyclist("Josh Pantano", "30/11/1995", 1.88, 2, 9);
 
-let nombres = "";
+let output = "";
 
-for(let i=0; i < cyclist_team.cyclists.length; i++){
-    nombres += cyclist_team.cyclists[i].name + ", ";
-}
+cyclist_team.cyclists.forEach(element => { output += element.name + ", "});
 
-document.getElementById("salida").innerHTML = nombres;
+document.getElementById("salida").innerHTML = output;
 
 }
 
@@ -248,10 +215,9 @@ cyclist_team.cyclists.sort((a, b) => age(a) - age(b));
 
 let output = "";
 
-for(let i=0; i < cyclist_team.cyclists.length; i++){
-  anos = age(cyclist_team.cyclists[i]);
-  output += cyclist_team.cyclists[i].name + ", tiene: " + anos + " años. ";
-}
+cyclist_team.cyclists.forEach(element => {output += element.name + ", tiene: " + age(element) + " años. ";
+  
+});
 
 document.getElementById("salida").innerHTML = output;
 
